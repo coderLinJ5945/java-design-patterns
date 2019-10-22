@@ -28,7 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * The ApiGateway aggregates calls to microservices based on the needs of the individual clients.
+ * ApiGateway :聚合微服务调用，统一交由 gateway 执行调用操作
+ * 简单理解：gateway 使用org.apache.httpcomponents 包进行统一的 httpclient 调用操作
  */
 @RestController
 public class ApiGateway {

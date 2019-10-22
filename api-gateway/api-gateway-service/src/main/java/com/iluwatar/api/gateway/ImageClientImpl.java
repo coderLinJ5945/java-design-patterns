@@ -44,7 +44,7 @@ public class ImageClientImpl implements ImageClient {
   public String getImagePath() {
     String response = null;
     try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-      HttpGet httpGet = new HttpGet("http://localhost:50005/image-path");
+      HttpGet httpGet = new HttpGet("http://localhost:8081/image-path");
       try (CloseableHttpResponse httpResponse = httpClient.execute(httpGet)) {
         response = EntityUtils.toString(httpResponse.getEntity());
       }

@@ -44,7 +44,7 @@ public class PriceClientImpl implements PriceClient {
   public String getPrice() {
     String response = null;
     try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-      HttpGet httpGet = new HttpGet("http://localhost:50006/price");
+      HttpGet httpGet = new HttpGet("http://localhost:8082/price");
       try (CloseableHttpResponse httpResponse = httpClient.execute(httpGet)) {
         response = EntityUtils.toString(httpResponse.getEntity());
       }

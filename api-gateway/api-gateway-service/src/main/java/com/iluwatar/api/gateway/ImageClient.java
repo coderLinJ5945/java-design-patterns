@@ -23,7 +23,7 @@
 package com.iluwatar.api.gateway;
 
 /**
- * An interface used to communicate with the Image microservice
+ * 用于与映像微服务通信的接口
  */
 public interface ImageClient {
   String getImagePath();

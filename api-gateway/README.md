@@ -28,3 +28,5 @@ microservice calls
 
 * [microservices.io - API Gateway](http://microservices.io/patterns/apigateway.html)
 * [NGINX - Building Microservices: Using an API Gateway](https://www.nginx.com/blog/building-microservices-using-an-api-gateway/)
+
+## API网关的核心还是 httpclient ，第七层进行数据传输

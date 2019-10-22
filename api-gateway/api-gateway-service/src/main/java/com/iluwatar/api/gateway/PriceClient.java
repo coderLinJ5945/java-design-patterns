@@ -23,7 +23,7 @@
 package com.iluwatar.api.gateway;
 
 /**
- * An interface used to communicate with the Price microservice
+ * 用于与Price微服务通信的接口
  */
 public interface PriceClient {
   String getPrice();
