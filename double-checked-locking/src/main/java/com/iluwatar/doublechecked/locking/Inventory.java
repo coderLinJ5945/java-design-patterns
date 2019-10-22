@@ -35,6 +35,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * 
  * Inventory
  *
+ * ReentrantLock 实现双重锁定
+ *
  */
 public class Inventory {
 
@@ -55,6 +57,10 @@ public class Inventory {
 
   /**
    * Add item
+   * 判断size，满足条件之后，锁定对象，再次判断，满足条件才执行
+   * 第二次判断的原因是：
+   *  多线程环境可能在第一次size的判断成立到上锁执行完成的时间段，
+   *  出现了其他线程执行了改变size的操作，导致未知异常
    */
   public boolean addItem(Item item) {
     if (items.size() < inventorySize) {
@@ -62,7 +68,8 @@ public class Inventory {
       try {
         if (items.size() < inventorySize) {
           items.add(item);
-          LOGGER.info("{}: items.size()={}, inventorySize={}", Thread.currentThread(), items.size(), inventorySize);
+          System.out.println(Thread.currentThread()+": items.size()="+items.size()+", inventorySize="+inventorySize);
+          LOGGER.debug("{}: items.size()={}, inventorySize={}", Thread.currentThread(), items.size(), inventorySize);
           return true;
         }
       } finally {
@@ -78,6 +85,9 @@ public class Inventory {
    * @return All the items of the inventory, as an unmodifiable list
    */
   public final List<Item> getItems() {
+    /**
+     * Collections.unmodifiableList() 1.8 新特性，返回一个不可修改的视图
+     */
     return Collections.unmodifiableList(items);
   }
 

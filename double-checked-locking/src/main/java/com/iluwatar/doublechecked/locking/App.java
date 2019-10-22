@@ -47,7 +47,7 @@ public class App {
 
   /**
    * Program entry point
-   * 
+   * 多线程往 Inventory 对象中并发添加，用双重锁防止并发写入异常
    * @param args command line args
    */
   public static void main(String[] args) {
