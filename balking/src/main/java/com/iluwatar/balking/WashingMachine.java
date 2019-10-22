@@ -33,11 +33,17 @@ import java.util.concurrent.TimeUnit;
 public class WashingMachine {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(WashingMachine.class);
+
+  /*模拟延迟对象*/
   private final DelayProvider delayProvider;
+
+  /*WashingMachine 的状态枚举类*/
   private WashingMachineState washingMachineState;
 
   /**
    * Creates a new instance of WashingMachine
+   *
+   * lambda 表达式：参数或者变量必须是接口，接口中只包含一个方法
    */
   public WashingMachine() {
     this((interval, timeUnit, task) -> {
@@ -48,6 +54,7 @@ public class WashingMachine {
       }
       task.run();
     });
+
   }
 
   /**
@@ -66,6 +73,9 @@ public class WashingMachine {
   /**
    * Method responsible for washing
    * if the object is in appropriate state
+   * 清洗方法：
+   * 如果 this 状态 为 WASHING ，不做任何事，直接返回
+   * 否则改变 washingMachineState 为 WASHING 状态，执行模拟清洗操作耗时
    */
   public void wash() {
     synchronized (this) {
