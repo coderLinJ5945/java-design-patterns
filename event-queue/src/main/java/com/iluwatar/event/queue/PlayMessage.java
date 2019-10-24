@@ -27,6 +27,7 @@ import javax.sound.sampled.AudioInputStream;
 
 /**
  * The Event Queue's queue will store the instances of this class.
+ * 事件队列，内容将存储到该class 数组中
  * @author mkuprivecz
  *
  */
