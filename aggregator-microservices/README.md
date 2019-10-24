@@ -27,3 +27,6 @@ Use the Aggregator Microservices pattern when you need a unified API for various
 ## Credits
 
 * [Microservice Design Patterns](http://blog.arungupta.me/microservice-design-patterns/)
+
+## 聚合微服务
+微服务中经常会使用到的，查询结果集包含了各个方面的数据信息，使用聚合服务是方便调用者做统一的接口调用

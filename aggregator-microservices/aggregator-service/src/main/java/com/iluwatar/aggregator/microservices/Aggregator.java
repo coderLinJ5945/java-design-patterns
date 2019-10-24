@@ -44,7 +44,7 @@ public class Aggregator {
 
   /**
    * Retrieves product data.
-   *
+   * 聚合产品的信息和库存数量接口，分别调用产品信息微服务和库存微服务
    * @return a Product.
    */
   @RequestMapping("/product")

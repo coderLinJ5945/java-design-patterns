@@ -23,18 +23,18 @@
 package com.iluwatar.aggregator.microservices;
 
 /**
- * Encapsulates all the data for a Product that clients will request.
+ * 产品对象
  */
 public class Product {
 
   /**
-   * The title of the product.
+   * 标题
    */
   private String title;
 
 
   /**
-   * The inventories of the product.
+   * 库存
    */
   private int productInventories;
 
