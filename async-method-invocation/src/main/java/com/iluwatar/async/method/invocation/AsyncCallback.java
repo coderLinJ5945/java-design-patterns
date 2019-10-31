@@ -27,13 +27,14 @@ import java.util.Optional;
 /**
  * 
  * AsyncCallback interface
- *
+ * 异步回调接口，异步回调模型实际使用了阻塞模式
  * @param <T>
  * 
  */
 public interface AsyncCallback<T> {
 
   /**
+   * 完成处理程序，它在异步任务完成或执行失败时执行
    * Complete handler which is executed when async task is completed or fails execution.
    *
    * @param value the evaluated value from async task, undefined when execution fails

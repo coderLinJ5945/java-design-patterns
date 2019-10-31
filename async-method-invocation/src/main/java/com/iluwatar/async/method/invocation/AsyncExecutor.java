@@ -28,7 +28,9 @@ import java.util.concurrent.ExecutionException;
 /**
  * 
  * AsyncExecutor interface
- *
+ * 异步执行器接口：
+ * 1. 开启异步处理任务（立即返回和回调方式返回）
+ * 2. 关闭异步处理任务
  */
 public interface AsyncExecutor {
 

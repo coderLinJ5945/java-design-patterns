@@ -63,7 +63,7 @@ public class App {
    * Program entry point
    */
   public static void main(String[] args) throws Exception {
-    // construct a new executor that will run async tasks
+    // 构造异步线程执行对象类
     AsyncExecutor executor = new ThreadAsyncExecutor();
 
     // start few async tasks with varying processing times, two last with callback handlers
@@ -71,16 +71,19 @@ public class App {
     AsyncResult<String> asyncResult2 = executor.startProcess(lazyval("test", 300));
     AsyncResult<Long> asyncResult3 = executor.startProcess(lazyval(50L, 700));
     AsyncResult<Integer> asyncResult4 = executor.startProcess(lazyval(20, 400), callback("Callback result 4"));
-    AsyncResult<String> asyncResult5 = executor.startProcess(lazyval("callback", 600), callback("Callback result 5"));
-
+    AsyncResult<String> asyncResult5 = executor.startProcess(lazyval("callback", 1000), callback("Callback result 5"));
+    /** 这里由于异步线程可能还没执行完成，立刻获取value 会抛异常，所以要等到endProcess(),来判断异步执行完成
+     *log("Result 5 After: " + asyncResult5.getValue());
+     */
     // emulate processing in the current thread while async tasks are running in their own threads
-    Thread.sleep(350); // Oh boy I'm working hard here
+    //Thread.sleep(350); // Oh boy I'm working hard here
     log("Some hard work done");
 
-    // wait for completion of the tasks
+    // 执行endProcess ，等待完成才能返回值，如果直接使用asyncResult1 有可能是获取不到值的
     Integer result1 = executor.endProcess(asyncResult1);
     String result2 = executor.endProcess(asyncResult2);
     Long result3 = executor.endProcess(asyncResult3);
+
     asyncResult4.await();
     asyncResult5.await();
 
@@ -88,11 +91,13 @@ public class App {
     log("Result 1: " + result1);
     log("Result 2: " + result2);
     log("Result 3: " + result3);
+    log("Result 5: " + asyncResult5.getValue());
+
   }
 
   /**
    * Creates a callable that lazily evaluates to given value with artificial delay.
-   *
+   * Thread.sleep 模拟延迟返回value值
    * @param value
    *          value to evaluate
    * @param delayMillis
@@ -122,6 +127,18 @@ public class App {
         log(name + ": " + value);
       }
     };
+/*    return new AsyncCallback<T>() {
+      @Override
+      public void onComplete(T value, Optional<Exception> ex) {
+        if (ex.isPresent()) {
+          log(name + " failed: " + ex.map(Exception::getMessage).orElse(""));
+        } else {
+          log(name + ": " + value);
+        }
+      }
+    };*/
+
+
   }
 
   private static void log(String msg) {

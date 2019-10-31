@@ -26,6 +26,10 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * AsyncResult interface
+ * 异步结果（真正的调用返回的结果）接口：
+ * 1. 异步执行任务状态：是否完成？
+ * 2. 已完成的异步任务的值
+ * 3. 阻塞当前线程，直到异步任务完成（有先后顺序时需要阻塞等待）
  * @param <T> parameter returned when getValue is invoked
  */
 public interface AsyncResult<T> {
